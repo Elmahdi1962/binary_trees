@@ -1,6 +1,9 @@
 #ifndef BINARY_TREES_H
 #define BINARY_TREES_H
 
+#define true 1
+#define false 0
+
 #include <stddef.h>
 #include <stdlib.h>
 
@@ -46,5 +49,7 @@ int binary_tree_balance(const binary_tree_t *tree);
 int height(const binary_tree_t *tree);
 int max(int num1, int num2);
 int binary_tree_is_full(const binary_tree_t *tree);
+int perfect(binary_tree_t *tree, int d);
+int binary_tree_is_perfect(const binary_tree_t *tree);
 
 #endif
