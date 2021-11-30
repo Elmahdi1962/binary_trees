@@ -1,8 +1,8 @@
 #ifndef BINARY_TREES_H
 #define BINARY_TREES_H
 
-#define true 1
-#define false 0
+#define TRUE 1
+#define FALSE 0
 
 #include <stddef.h>
 #include <stdlib.h>
@@ -17,10 +17,10 @@
  */
 struct binary_tree_s
 {
-    int n;
-    struct binary_tree_s *parent;
-    struct binary_tree_s *left;
-    struct binary_tree_s *right;
+	int n;
+	struct binary_tree_s *parent;
+	struct binary_tree_s *left;
+	struct binary_tree_s *right;
 };
 
 typedef struct binary_tree_s binary_tree_t;
