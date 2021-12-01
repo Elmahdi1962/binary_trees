@@ -3,6 +3,7 @@
 
 #define TRUE 1
 #define FALSE 0
+#define MAX_Q_SIZE 500
 
 #include <stdio.h>
 #include <stddef.h>
@@ -59,12 +60,9 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 int binary_tree_is_complete(const binary_tree_t *tree);
 binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 
-#define MAX_Q_SIZE 500
-#include <stdbool.h>
-
 binary_tree_t **createQueue(int *, int *);
 void enQueue(binary_tree_t **, int *, binary_tree_t *);
 binary_tree_t *deQueue(binary_tree_t **, int *);
-bool isQueueEmpty(int *front, int *rear);
+int isQueueEmpty(int *front, int *rear);
 
 #endif

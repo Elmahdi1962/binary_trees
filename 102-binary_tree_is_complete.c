@@ -47,10 +47,10 @@ binary_tree_t *deQueue(binary_tree_t **queue, int *front)
  * isQueueEmpty - checks queue is empty
  * @front: pointer to front of the queue
  * @rear: pointer to rear fo the queue
- * Return: True or False
+ * Return: TRUE or FALSE
  */
 
-bool isQueueEmpty(int *front, int *rear)
+int isQueueEmpty(int *front, int *rear)
 {
 	return (*rear == *front);
 }
@@ -66,12 +66,12 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 	binary_tree_t *root = (binary_tree_t *)tree;
 
 	if (root == NULL)
-		return (true);
+		return (TRUE);
 
 	int rear, front;
 	binary_tree_t **queue = createQueue(&front, &rear);
 
-	bool flag = false;
+	int flag = FALSE;
 
 	enQueue(queue, &rear, root);
 	while (!isQueueEmpty(&front, &rear))
@@ -80,25 +80,25 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 		/* Check if left child is present*/
 		if (temp_node->left)
 		{
-			if (flag == true)
-				return (false);
+			if (flag == TRUE)
+				return (FALSE);
 
 			enQueue(queue, &rear, temp_node->left);
 		}
 		else
-			flag = true;
+			flag = TRUE;
 
 		/* Check if right child is present*/
 		if (temp_node->right)
 		{
-			if (flag == true)
-				return (false);
+			if (flag == TRUE)
+				return (FALSE);
 
 			enQueue(queue, &rear, temp_node->right);
 		}
 		else
-			flag = (true);
+			flag = (TRUE);
 	}
 
-	return (true);
+	return (TRUE);
 }
