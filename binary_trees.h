@@ -59,10 +59,13 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
 binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree);
 int binary_tree_is_complete(const binary_tree_t *tree);
 binary_tree_t *binary_tree_sibling(binary_tree_t *node);
+int binary_tree_is_bst(const binary_tree_t *tree);
+int isBSTUtil(binary_tree_t *root, binary_tree_t *prev);
 
 binary_tree_t **createQueue(int *, int *);
 void enQueue(binary_tree_t **, int *, binary_tree_t *);
 binary_tree_t *deQueue(binary_tree_t **, int *);
 int isQueueEmpty(int *front, int *rear);
+
 
 #endif
