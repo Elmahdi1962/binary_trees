@@ -1,5 +1,6 @@
 #include "binary_trees.h"
-
+int isValid(binary_tree_t *root);
+void inorder(binary_tree_t *root, binary_tree_t *prev[], int isvalid[]);
 /**
  * binary_tree_is_bst - checks if a binary tree is a valid Binary Search Tree
  * @tree: pointer to the tree tree of the tree
@@ -8,67 +9,33 @@
 
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
-	binary_tree_t *prev = NULL, *lprev = NULL;
-	int flag = 1;
-
 	if (tree == NULL)
 		return (0);
 
-	return (isBSTUtil((binary_tree_t *)tree, prev, lprev, flag, tree->n));
+	return (isValid((binary_tree_t *)tree));
 }
 
-/**
- * isBSTUtil - checks if bt is bst
- * @root: pointer to root node
- * @prev: pointer to prev node
- * @flag: a flag to check if current node is in meft or
- * right subtree of the root
- * @rt: value of the root
- * @lprev: pointer to prev node for left nodes
- * Return: 0 or 1
- */
-
-int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, binary_tree_t *lprev,
-			  int flag, int rt)
+int isValid(binary_tree_t *root)
 {
-	int lflag, rflag;
+	int isvalid[] = {1};
+	binary_tree_t *prev[] = {NULL};
 
-	if (flag == 1)
+	inorder(root, prev, isvalid);
+	return (isvalid[0]);
+}
+
+void inorder(binary_tree_t *root, binary_tree_t *prev[], int isvalid[])
+{
+	if (root != NULL)
 	{
-		lflag = 0;
-		rflag = 2;
-	} else
-	{
-		lflag = flag, rflag = flag;
-	}
-	if (root)
-	{
-		if (root->left != NULL && root->left->n > root->n)
-			return (0);
-		if (root->right != NULL && root->right->n <= root->n)
-			return (0);
-		if (lflag == rflag)
+		inorder(root->left, prev, isvalid);
+
+		if (prev[0] != NULL && prev[0]->n >= root->n)
 		{
-			if (lflag == 0)
-			{
-				if (root->n > rt)
-					return (0);
-			} else if (lflag == 2)
-			{
-				if (root->n <= rt)
-					return (0);
-			}
+			isvalid[0] = 0;
+			return;
 		}
-		if (lprev != NULL && root->n >= lprev->n)
-			return (0);
-		lprev = root;
-		if (!isBSTUtil(root->left, prev, lprev, lflag, rt))
-			return (0);
-		if (prev != NULL && root->n <= prev->n)
-			return (0);
-		prev = root;
-		lprev = NULL;
-		return (isBSTUtil(root->right, prev, lprev, rflag, rt));
+		prev[0] = root;
+		inorder(root->right, prev, isvalid);
 	}
-	return (1);
 }
