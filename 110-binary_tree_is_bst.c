@@ -44,7 +44,7 @@ int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, int flag, int rt)
 	{
 		if (root->left != NULL && root->left->n > root->n)
 			return (0);
-		if (root->right != NULL && root->right->n < root->n)
+		if (root->right != NULL && root->right->n <= root->n)
 			return (0);
 		if (lflag == rflag)
 		{
@@ -54,14 +54,14 @@ int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, int flag, int rt)
 					return (0);
 			} else if (lflag == 2)
 			{
-				if (root->n < rt)
+				if (root->n <= rt)
 					return (0);
 			}
 		}
 		if (!isBSTUtil(root->left, prev, lflag, rt))
 			return (0);
 
-		if (prev != NULL && root->n < prev->n)
+		if (prev != NULL && root->n <= prev->n)
 			return (0);
 		prev = root;
 		return (isBSTUtil(root->right, prev, rflag, rt));
