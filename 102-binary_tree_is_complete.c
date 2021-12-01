@@ -71,9 +71,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 		return (0);
 
 	queue = createQueue(&front, &rear);
-
 	flag = FALSE;
-
 	enQueue(queue, &rear, root);
 	while (!isQueueEmpty(&front, &rear))
 	{
@@ -82,24 +80,27 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 		if (temp_node->left)
 		{
 			if (flag == TRUE)
+			{
+				free(queue);
 				return (FALSE);
-
+			}
 			enQueue(queue, &rear, temp_node->left);
 		}
 		else
 			flag = TRUE;
-
 		/* Check if right child is present*/
 		if (temp_node->right)
 		{
 			if (flag == TRUE)
+			{
+				free(queue);
 				return (FALSE);
-
+			}
 			enQueue(queue, &rear, temp_node->right);
 		}
 		else
 			flag = (TRUE);
 	}
-
+	free(queue);
 	return (TRUE);
 }
