@@ -1,12 +1,4 @@
 #include "binary_trees.h"
-#include <stdbool.h>
-#define MAX_Q_SIZE 500
-
-binary_tree_t **createQueue(int *, int *);
-void enQueue(binary_tree_t **, int *, binary_tree_t *);
-binary_tree_t *deQueue(binary_tree_t **, int *);
-bool isQueueEmpty(int *front, int *rear);
-
 
 /**
  * createQueue - createQueue a queue
