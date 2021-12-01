@@ -61,6 +61,8 @@ int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, int flag, int rt)
 		if (!isBSTUtil(root->left, prev, lflag, rt))
 			return (0);
 
+		if (prev != NULL && root->n < prev->n)
+			return (0);
 		prev = root;
 		return (isBSTUtil(root->right, prev, rflag, rt));
 	}
