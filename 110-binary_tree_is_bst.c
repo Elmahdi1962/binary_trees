@@ -27,11 +27,11 @@ int isBSTUtil(binary_tree_t *root, binary_tree_t *prev)
 {
 	if (root)
 	{
-		if (root->left != NULL && root->left->n > root->n) 
-			return 0; 
+		if (root->left != NULL && root->left->n > root->n)
+			return (0);
 
-		if (root->right != NULL && root->right->n < root->n) 
-			return 0; 
+		if (root->right != NULL && root->right->n < root->n)
+			return (0);
 
 		if (!isBSTUtil(root->left, prev))
 			return (0);
