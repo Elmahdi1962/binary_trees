@@ -1,5 +1,7 @@
-*main.c
+*
 *-exec
 *#
 *~
 tests
+!*.c
+*main.c
