@@ -1,4 +1,67 @@
 #include "binary_trees.h"
+#include <stdbool.h>
+#define MAX_Q_SIZE 500
+
+binary_tree_t **createQueue(int *, int *);
+void enQueue(binary_tree_t **, int *, binary_tree_t *);
+binary_tree_t *deQueue(binary_tree_t **, int *);
+bool isQueueEmpty(int *front, int *rear);
+
+
+/**
+ * createQueue - createQueue a queue
+ * @front: pointer to the front of the queue
+ * @rear: pointer to rear of the queue
+ * Return: pointer to pointer to queue
+ */
+
+binary_tree_t **createQueue(int *front, int *rear)
+{
+	binary_tree_t **queue =
+	(binary_tree_t **)malloc(sizeof(binary_tree_t *) * MAX_Q_SIZE);
+
+	*front = *rear = 0;
+	return (queue);
+}
+
+/**
+ * enQueue - enQueue the new node
+ * @queue: pointer to pointer to queue
+ * @rear: pointer to rear of the queue
+ * @new_node: pointer to the new node
+ * Return: void
+ */
+
+void enQueue(binary_tree_t **queue, int *rear, binary_tree_t *new_node)
+{
+	queue[*rear] = new_node;
+	(*rear)++;
+}
+
+/**
+ * deQueue - deQueue the front node
+ * @queue: pointer to pointer to queue
+ * @front: pointer to front of the queue
+ * Return: deQueueed node
+ */
+
+binary_tree_t *deQueue(binary_tree_t **queue, int *front)
+{
+	(*front)++;
+	return (queue[*front - 1]);
+}
+
+/**
+ * isQueueEmpty - checks queue is empty
+ * @front: pointer to front of the queue
+ * @rear: pointer to rear fo the queue
+ * Return: True or False
+ */
+
+bool isQueueEmpty(int *front, int *rear)
+{
+	return (*rear == *front);
+}
 
 /**
  * binary_tree_is_complete - checks if a binary tree is complete
@@ -8,92 +71,42 @@
 
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	int flag;
+	binary_tree_t *root = (binary_tree_t *)tree;
 
-	if (tree == NULL)
-		return (FALSE);
-	flag = is_complete(tree);
+	if (root == NULL)
+		return (true);
 
-	return (flag >= 1 ? TRUE : FALSE);
-}
+	int rear, front;
+	binary_tree_t **queue = createQueue(&front, &rear);
 
-/**
- * is_complete - checks if a binary tree is complete
- * @tree: pointer to the root node of the tree
- * Return: 0 or 1 or number bigger than 1
- */
+	bool flag = false;
 
-int is_complete(const binary_tree_t *tree)
-{
-	int rflag = 1, lflag = 1;
-	size_t lh, rh;
+	enQueue(queue, &rear, root);
+	while (!isQueueEmpty(&front, &rear))
+	{
+		binary_tree_t *temp_node = deQueue(queue, &front);
+		/* Check if left child is present*/
+		if (temp_node->left)
+		{
+			if (flag == true)
+				return (false);
 
-	if (tree == NULL)
-		return (FALSE);
+			enQueue(queue, &rear, temp_node->left);
+		}
+		else
+			flag = true;
 
-	lh = binary_tree_height(tree->left) + 1;
-	rh = binary_tree_height(tree->right) + 1;
+		/* Check if right child is present*/
+		if (temp_node->right)
+		{
+			if (flag == true)
+				return (false);
 
-	if ((int)rh > (int)lh)
-		return (FALSE);
+			enQueue(queue, &rear, temp_node->right);
+		}
+		else
+			flag = (true);
+	}
 
-	if (tree->left == NULL && tree->right == NULL)
-		return (TRUE);
-	else if (tree->left != NULL && tree->right == NULL)
-		return (2);
-	else if (tree->left == NULL && tree->right != NULL)
-		return (FALSE);
-	else if (tree->left->left == NULL && (tree->right->right != NULL ||
-			 tree->right->left != NULL))
-		return (FALSE);
-	else if (tree->left->right == NULL && (tree->right->right != NULL ||
-			 tree->right->left != NULL))
-		return (FALSE);
-
-	lflag *= is_complete(tree->left);
-	rflag *= is_complete(tree->right);
-
-	if (lflag == 2 && rflag == 2)
-		return (FALSE);
-	return (lflag * rflag);
-}
-
-/**
- * binary_tree_height - measures the height of a binary tree
- * @tree: pointer to the root node of the tree
- * Return: the size or 0 if tree is null
- */
-
-size_t binary_tree_height(const binary_tree_t *tree)
-{
-	int counter;
-
-	if (tree == NULL)
-		return (0);
-
-	counter = tree_height(tree);
-
-	return ((size_t)counter);
-}
-
-/**
- * tree_height - count node tree height
- * @node: node to measure
- * Return: height
- */
-
-int tree_height(const binary_tree_t *node)
-{
-	int lDepth, rDepth;
-
-	if (node == NULL)
-		return (-1);
-
-	lDepth = tree_height(node->left);
-	rDepth = tree_height(node->right);
-
-	if (lDepth > rDepth)
-		return (lDepth + 1);
-	else
-		return (rDepth + 1);
+	return (true);
 }
