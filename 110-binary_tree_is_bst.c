@@ -1,6 +1,5 @@
 #include "binary_trees.h"
-int isValid(binary_tree_t *root);
-void inorder(binary_tree_t *root, binary_tree_t *prev[], int isvalid[]);
+
 /**
  * binary_tree_is_bst - checks if a binary tree is a valid Binary Search Tree
  * @tree: pointer to the tree tree of the tree
@@ -15,6 +14,12 @@ int binary_tree_is_bst(const binary_tree_t *tree)
 	return (isValid((binary_tree_t *)tree));
 }
 
+/**
+ * isValid - checks it bt is bst
+ * @root: root node
+ * Return: 1 or 0
+ */
+
 int isValid(binary_tree_t *root)
 {
 	int isvalid[] = {1};
@@ -23,6 +28,14 @@ int isValid(binary_tree_t *root)
 	inorder(root, prev, isvalid);
 	return (isvalid[0]);
 }
+
+/**
+ * inorder - helper function for isValid
+ * @root: pointer to node
+ * @prev: array of prev pointers to nodes
+ * @isvalid: array of numbers
+ * Return: 1 or 0
+ */
 
 void inorder(binary_tree_t *root, binary_tree_t *prev[], int isvalid[])
 {
