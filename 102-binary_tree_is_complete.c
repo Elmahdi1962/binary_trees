@@ -65,7 +65,7 @@ int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	binary_tree_t *root = (binary_tree_t *)tree;
 
-	if (root == NULL)
+	if (tree == NULL)
 		return (0);
 
 	int rear, front;
