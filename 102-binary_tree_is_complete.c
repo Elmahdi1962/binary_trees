@@ -64,14 +64,14 @@ int isQueueEmpty(int *front, int *rear)
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	binary_tree_t *root = (binary_tree_t *)tree;
+	int rear, front, flag;
 
 	if (tree == NULL)
 		return (0);
 
-	int rear, front;
 	binary_tree_t **queue = createQueue(&front, &rear);
 
-	int flag = FALSE;
+	flag = FALSE;
 
 	enQueue(queue, &rear, root);
 	while (!isQueueEmpty(&front, &rear))
