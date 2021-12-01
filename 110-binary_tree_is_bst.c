@@ -8,61 +8,47 @@
 
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
-	binary_tree_t *prev = NULL;
-	int flag = 1;
-
 	if (tree == NULL)
 		return (0);
 
-	return (isBSTUtil((binary_tree_t *)tree, prev, flag, tree->n));
+	return (isValid((binary_tree_t *)tree));
 }
 
 /**
- * isBSTUtil - checks if bt is bst
- * @root: pointer to root node
- * @prev: pointer to prev node
- * @flag: a flag to check if current node is in meft or
- * right subtree of the root
- * @rt: value of the root
- * Return: 0 or 1
+ * isValid - checks it bt is bst
+ * @root: root node
+ * Return: 1 or 0
  */
 
-int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, int flag, int rt)
+int isValid(binary_tree_t *root)
 {
-	int lflag, rflag;
+	int isvalid[] = {1};
+	binary_tree_t *prev[] = {NULL};
 
-	if (flag == 1)
+	inorder(root, prev, isvalid);
+	return (isvalid[0]);
+}
+
+/**
+ * inorder - helper function for isValid
+ * @root: pointer to node
+ * @prev: array of prev pointers to nodes
+ * @isvalid: array of numbers
+ * Return: 1 or 0
+ */
+
+void inorder(binary_tree_t *root, binary_tree_t *prev[], int isvalid[])
+{
+	if (root != NULL)
 	{
-		lflag = 0;
-		rflag = 2;
-	} else
-	{
-		lflag = flag;
-		rflag = flag;
-	}
-	if (root)
-	{
-		if (root->left != NULL && root->left->n > root->n)
-			return (0);
-		if (root->right != NULL && root->right->n < root->n)
-			return (0);
-		if (lflag == rflag)
+		inorder(root->left, prev, isvalid);
+
+		if (prev[0] != NULL && prev[0]->n >= root->n)
 		{
-			if (lflag == 0)
-			{
-				if (root->n > rt)
-					return (0);
-			} else if (lflag == 2)
-			{
-				if (root->n < rt)
-					return (0);
-			}
+			isvalid[0] = 0;
+			return;
 		}
-		if (!isBSTUtil(root->left, prev, lflag, rt))
-			return (0);
-
-		prev = root;
-		return (isBSTUtil(root->right, prev, rflag, rt));
+		prev[0] = root;
+		inorder(root->right, prev, isvalid);
 	}
-	return (1);
 }
