@@ -8,13 +8,13 @@
 
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
-	binary_tree_t *prev = NULL;
+	binary_tree_t *prev = NULL, *lprev = NULL;
 	int flag = 1;
 
 	if (tree == NULL)
 		return (0);
 
-	return (isBSTUtil((binary_tree_t *)tree, prev, flag, tree->n));
+	return (isBSTUtil((binary_tree_t *)tree, prev, lprev, flag, tree->n));
 }
 
 /**
@@ -24,10 +24,12 @@ int binary_tree_is_bst(const binary_tree_t *tree)
  * @flag: a flag to check if current node is in meft or
  * right subtree of the root
  * @rt: value of the root
+ * @lprev: pointer to prev node for left nodes
  * Return: 0 or 1
  */
 
-int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, int flag, int rt)
+int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, binary_tree_t *lprev,
+			  int flag, int rt)
 {
 	int lflag, rflag;
 
@@ -37,8 +39,7 @@ int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, int flag, int rt)
 		rflag = 2;
 	} else
 	{
-		lflag = flag;
-		rflag = flag;
+		lflag = flag, rflag = flag;
 	}
 	if (root)
 	{
@@ -58,13 +59,16 @@ int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, int flag, int rt)
 					return (0);
 			}
 		}
-		if (!isBSTUtil(root->left, prev, lflag, rt))
+		if (lprev != NULL && root->n >= lprev->n)
 			return (0);
-
+		lprev = root;
+		if (!isBSTUtil(root->left, prev, lprev, lflag, rt))
+			return (0);
 		if (prev != NULL && root->n <= prev->n)
 			return (0);
 		prev = root;
-		return (isBSTUtil(root->right, prev, rflag, rt));
+		lprev = NULL;
+		return (isBSTUtil(root->right, prev, lprev, rflag, rt));
 	}
 	return (1);
 }

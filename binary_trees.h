@@ -60,7 +60,7 @@ binary_tree_t *binary_tree_rotate_left(binary_tree_t *tree);
 int binary_tree_is_complete(const binary_tree_t *tree);
 binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 int binary_tree_is_bst(const binary_tree_t *tree);
-int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, int flag, int rt);
+int isBSTUtil(binary_tree_t *root, binary_tree_t *prev, binary_tree_t *lprev, int flag, int rt);
 
 binary_tree_t **createQueue(int *, int *);
 void enQueue(binary_tree_t **, int *, binary_tree_t *);
