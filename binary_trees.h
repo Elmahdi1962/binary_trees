@@ -3,7 +3,6 @@
 
 #define TRUE 1
 #define FALSE 0
-#define MAX_Q_SIZE 500
 
 #include <stdio.h>
 #include <stddef.h>
