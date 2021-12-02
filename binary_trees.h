@@ -30,10 +30,8 @@ typedef struct binary_tree_s avl_t;
 typedef struct binary_tree_s heap_t;
 
 void binary_tree_print(const binary_tree_t *);
-
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);
-
 binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value);
 void binary_tree_delete(binary_tree_t *tree);
 int binary_tree_is_leaf(const binary_tree_t *node);
@@ -71,6 +69,7 @@ int isQueueEmpty(int *front, int *rear);
 bst_t *array_to_bst(int *array, size_t size);
 int bs_tree_preorder(bst_t *tree, int n);
 bst_t *bst_search(const bst_t *tree, int value);
-
+bst_t *bst_remove(bst_t *root, int value);
+bst_t *minval(bst_t *node);
 
 #endif
