@@ -15,7 +15,6 @@ bst_t *bst_insert(bst_t **tree, int value)
 		return (NULL);
 
 	duplicate = bs_tree_preorder((*tree), value);
-	printf("\nduplicated == %d\n", duplicate);
 
 	if (duplicate == 0)
 		return (NULL);
@@ -26,6 +25,8 @@ bst_t *bst_insert(bst_t **tree, int value)
 		(*tree) = new;
 		return (new);
 	}
+	if (value == (*tree)->n)
+		return (NULL);
 
 	if (value < (*tree)->n)
 	{
@@ -35,7 +36,8 @@ bst_t *bst_insert(bst_t **tree, int value)
 			(*tree)->left = new;
 			return (new);
 		}
-		bst_insert(&(*tree)->left, value);
+		new = bst_insert(&(*tree)->left, value);
+		return (new);
 	}
 	else if (value > (*tree)->n)
 	{
@@ -45,10 +47,9 @@ bst_t *bst_insert(bst_t **tree, int value)
 			(*tree)->right = new;
 			return (new);
 		}
-		bst_insert(&(*tree)->right, value);
+		new = bst_insert(&(*tree)->right, value);
+		return (new);
 	}
-	else if (value == (*tree)->n)
-		return (NULL);
 	if ((*tree) == NULL)
 		return (NULL);
 	return (*tree);
@@ -70,10 +71,7 @@ int bs_tree_preorder(bst_t *tree, int n)
 		return (1);
 
 	if (tree->n == n)
-	{
-		printf("duplicate found");
 		return (0);
-	}
 
 	leftr = bs_tree_preorder(tree->left, n);
 	rightr = bs_tree_preorder(tree->right, n);
