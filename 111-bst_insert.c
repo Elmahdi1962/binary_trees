@@ -13,6 +13,8 @@ bst_t *bst_insert(bst_t **tree, int value)
 
 	if (tree == NULL)
 		return (NULL);
+	if (value == (*tree)->n)
+		return (NULL);
 
 	duplicate = bs_tree_preorder((*tree), value);
 	printf("\nduplicated == %d\n", duplicate);
@@ -51,8 +53,7 @@ bst_t *bst_insert(bst_t **tree, int value)
 		bst_insert(&(*tree)->right, value);
 		return (*tree);
 	}
-	else if (value == (*tree)->n)
-		return (NULL);
+
 	if ((*tree) == NULL)
 		return (NULL);
 	return (*tree);
