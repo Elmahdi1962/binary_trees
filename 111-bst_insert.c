@@ -31,24 +31,24 @@ bst_t *bst_insert(bst_t **tree, int value)
 	{
 		if ((*tree)->left == NULL)
 		{
-			new = binary_tree_node((*tree), value);
-			(*tree)->left = new;
+			new = (*tree)->left = binary_tree_node((*tree), value);
+			/*(*tree)->left = new;*/
 			return (new);
 		}
-/*		bst_insert(&(*tree)->left, value);
+		bst_insert(&(*tree)->left, value);
 		return (*tree);
-*/	}
+	}
 	else if (value > (*tree)->n)
 	{
 		if ((*tree)->right == NULL)
 		{
-			new = binary_tree_node((*tree), value);
-			(*tree)->right = new;
+			new = (*tree)->right = binary_tree_node((*tree), value);
+			/*(*tree)->right = new;*/
 			return (new);
 		}
-/*		bst_insert(&(*tree)->right, value);
+		bst_insert(&(*tree)->right, value);
 		return (*tree);
-*/	}
+	}
 	else if (value == (*tree)->n)
 		return (NULL);
 	if ((*tree) == NULL)
