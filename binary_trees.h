@@ -63,7 +63,7 @@ binary_tree_t *binary_tree_sibling(binary_tree_t *node);
 int binary_tree_is_bst(const binary_tree_t *tree);
 int isValid(binary_tree_t *root);
 void inorder(binary_tree_t *root, binary_tree_t *prev[], int isvalid[]);
-
+bst_t *bst_insert(bst_t **tree, int value);
 binary_tree_t **createQueue(int *, int *);
 void enQueue(binary_tree_t **, int *, binary_tree_t *);
 binary_tree_t *deQueue(binary_tree_t **, int *);
