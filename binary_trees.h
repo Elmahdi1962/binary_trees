@@ -68,6 +68,7 @@ binary_tree_t **createQueue(int *, int *);
 void enQueue(binary_tree_t **, int *, binary_tree_t *);
 binary_tree_t *deQueue(binary_tree_t **, int *);
 int isQueueEmpty(int *front, int *rear);
+bst_t *array_to_bst(int *array, size_t size);
 
 
 #endif
