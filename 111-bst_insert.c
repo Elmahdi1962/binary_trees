@@ -9,23 +9,44 @@
 bst_t *bst_insert(bst_t **tree, int value)
 {
 	int duplicate = 0;
+	bst_t *new;
 
 	if (tree == NULL)
 		return (NULL);
+
 	duplicate = bs_tree_preorder((*tree), value);
 	printf("\nduplicated == %d\n", duplicate);
+
 	if (duplicate == 0)
 		return (NULL);
+
 	if ((*tree) == NULL)
 	{
-		(*tree) = binary_tree_node((*tree), value);
-		return ((*tree));
+		new = binary_tree_node((*tree), value);
+		(*tree) = new;
+		return (new);
 	}
 
 	if (value < (*tree)->n)
-		(*tree)->left = bst_insert(&(*tree)->left, value);
+	{
+		if ((*tree)->left == NULL)
+		{
+			new = binary_tree_node((*tree), value);
+			(*tree)->left = new;
+			return (new);
+		}
+		bst_insert(&(*tree)->left, value);
+	}
 	else if (value > (*tree)->n)
-		(*tree)->right = bst_insert(&(*tree)->right, value);
+	{
+		if ((*tree)->right == NULL)
+		{
+			new = binary_tree_node((*tree), value);
+			(*tree)->right = new;
+			return (new);
+		}
+		bst_insert(&(*tree)->right, value);
+	}
 	else if (value == (*tree)->n)
 		return (NULL);
 	if ((*tree) == NULL)
