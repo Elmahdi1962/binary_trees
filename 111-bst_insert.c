@@ -17,7 +17,10 @@ bst_t *bst_insert(bst_t **tree, int value)
 	if (duplicate == 0)
 		return (NULL);
 	if ((*tree) == NULL)
-		return (binary_tree_node((*tree), value));
+	{
+		(*tree) = binary_tree_node((*tree), value);
+		return ((*tree));
+	}
 
 	if (value < (*tree)->n)
 		(*tree)->left = bst_insert(&(*tree)->left, value);
@@ -32,7 +35,7 @@ bst_t *bst_insert(bst_t **tree, int value)
 
 /**
  * bs_tree_preorder - goes through a binary tree
- * using pre-order traversal
+ * using pre-order traversal to find duplicate
  * @tree: pointer to the root node
  * @n: value to check for
  * Return: 0 for true or 1 for false
@@ -44,8 +47,13 @@ int bs_tree_preorder(bst_t *tree, int n)
 
 	if (tree == NULL)
 		return (1);
+
 	if (tree->n == n)
+	{
+		printf("duplicate found");
 		return (0);
+	}
+
 	leftr = bs_tree_preorder(tree->left, n);
 	rightr = bs_tree_preorder(tree->right, n);
 	return (leftr * rightr);
