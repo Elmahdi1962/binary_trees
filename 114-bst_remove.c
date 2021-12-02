@@ -1,11 +1,11 @@
 #include "binary_trees.h"
 
 /**
-* bst_search - a function that searches for a node
+* bst_remove - a function that removes a node
 *
-* @tree: the tree's root
-* @value: the value to match
-* Return: The node containing @value
+* @root: the tree's root
+* @value: the value to remove when match
+* Return: The root
 */
 bst_t *bst_remove(bst_t *root, int value)
 {
@@ -31,7 +31,7 @@ bst_t *bst_remove(bst_t *root, int value)
 
 		else if (root->right == NULL)
 		{
- 			temp = root->left;
+			temp = root->left;
 			free(root);
 			return (temp);
 		}
