@@ -11,15 +11,15 @@ bst_t *bst_search(const bst_t *tree, int value)
 {
 	if (tree == NULL)
 		return (NULL);
-	
+
 	if (tree->n == value)
-		return (value);
-	
+		return ((bst_t *)tree);
+
 	if (tree->n < value)
 		return (bst_search(tree->right, value));
-	
+
 	if (tree->n > value)
 		return (bst_search(tree->left, value));
-	
+
 	return (NULL);
 }
