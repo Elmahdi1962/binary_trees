@@ -5,3 +5,4 @@
 tests
 !*.c
 *main.c
+!*-O
