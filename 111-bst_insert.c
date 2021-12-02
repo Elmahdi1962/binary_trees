@@ -34,7 +34,7 @@ bst_t *bst_insert(bst_t **tree, int value)
  * bs_tree_preorder - goes through a binary tree
  * using pre-order traversal
  * @tree: pointer to the root node
- * @n: pointer to a function to call for each node.
+ * @n: value to check for
  * Return: 0 for true or 1 for false
  */
 
