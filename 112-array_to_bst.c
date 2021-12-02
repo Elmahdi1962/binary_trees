@@ -9,44 +9,15 @@
 
 bst_t *array_to_bst(int *array, size_t size)
 {
-	int *created_nodes = malloc(sizeof(int) * size);
-	int i = 0, j, csize = 0, pass = 0;
-	bst_t *root = NULL, *new;
+	int i;
+	bst_t *root = NULL;
 
-	if (array == NULL)
+	if (array != NULL)
 	{
-		free(created_nodes);
-		return (NULL);
+		for (i = 0; i < (int)size; i++)
+		{
+			bst_insert(&root, *(array + i));
+		}
 	}
-	while (i < (int)size)
-	{
-		j = 0;
-		while (j < csize)
-		{
-			if (created_nodes[j] == array[i])
-			{
-				pass = 1;
-				break;
-			}
-			j++;
-		}
-		if (pass == 1)
-		{
-			created_nodes[i] = -8881;
-			pass = 0, csize++, ++i;
-			continue;
-		}
-		if (i == 0)
-			root = bst_insert(&root, array[i]);
-		else
-		{
-			new = bst_insert(&root, array[i]);
-			if (new == NULL)
-				return (NULL);
-		}
-		created_nodes[i] = array[i];
-		csize++, i++;
-	}
-	free(created_nodes);
 	return (root);
 }
