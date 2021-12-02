@@ -3,6 +3,7 @@
 /**
 * bst_insert - a function that inserts a new node in search tree
 * @tree: The root node
+* @value: new node's value
 * Return: The new node
 */
 
@@ -13,27 +14,21 @@ bst_t *bst_insert(bst_t **tree, int value)
 
 	if (tree == NULL)
 		return (NULL);
-
 	duplicate = bs_tree_preorder((*tree), value);
-
 	if (duplicate == 0)
 		return (NULL);
-
 	if ((*tree) == NULL)
 	{
-		new = binary_tree_node((*tree), value);
-		(*tree) = new;
+		(*tree) = new = binary_tree_node((*tree), value);
 		return (new);
 	}
 	if (value == (*tree)->n)
 		return (NULL);
-
 	if (value < (*tree)->n)
 	{
 		if ((*tree)->left == NULL)
 		{
-			new = binary_tree_node((*tree), value);
-			(*tree)->left = new;
+			new = (*tree)->left = binary_tree_node((*tree), value);
 			return (new);
 		}
 		new = bst_insert(&(*tree)->left, value);
