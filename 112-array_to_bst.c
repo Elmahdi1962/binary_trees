@@ -47,11 +47,6 @@ bst_t *array_to_bst(int *array, size_t size)
 		csize++;
 		i++;
 	}
-	if (array == NULL)
-	{
-		free(created_nodes);
-		return (NULL);
-	}
 	free(created_nodes);
 	return (root);
 }
