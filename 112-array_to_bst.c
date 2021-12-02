@@ -15,8 +15,10 @@ bst_t *array_to_bst(int *array, size_t size)
 	int csize = 0, pass = 0;
 
 	if (array == NULL)
+	{
+		free(created_nodes);
 		return (NULL);
-
+	}
 	while (i < (int)size)
 	{
 		j = 0;
@@ -45,5 +47,6 @@ bst_t *array_to_bst(int *array, size_t size)
 		csize++;
 		i++;
 	}
+	free(created_nodes);
 	return (root);
 }
