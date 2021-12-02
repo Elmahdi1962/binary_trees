@@ -33,6 +33,7 @@ bst_t *array_to_bst(int *array, size_t size)
 		}
 		if (pass == 1)
 		{
+			created_nodes[i] = -8881;
 			pass = 0;
 			csize++;
 			++i;
