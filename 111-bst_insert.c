@@ -47,6 +47,7 @@ bst_t *bst_insert(bst_t **tree, int value)
 			return (new);
 		}
 		bst_insert(&(*tree)->right, value);
+		return (*tree);
 	}
 	else if (value == (*tree)->n)
 		return (NULL);
